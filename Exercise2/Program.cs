@@ -4,9 +4,9 @@ using System.Text.RegularExpressions;
 
 namespace Exercise2
 {
-    internal class Program
+    public class Program
     {
-        static ConsoleUI ui = new ConsoleUI();
+        public static IUI ui = new ConsoleUI();
         static void Main(string[] args)
         {
             InputChoice inputChoice;
@@ -50,6 +50,7 @@ namespace Exercise2
 
         public static void GetThird()
         {
+            //TODO unit test with different words
             //Output third word of input line
             string line = Util.AskFor3Words(Language.EnterAtLeast3WordsEnglish, Language.Line3WordsEnglish, ui);
             //Regex replaces multiple white-spaces with a single one
@@ -58,6 +59,7 @@ namespace Exercise2
 
         public static void Multiply10()
         {
+            //TODO unit test with word
             //Multiply input word 10 times and output those in a single line
             string word = Util.AskForString(Language.EnterWordForRepeatEnglish, Language.WordEnglish, ui);
             string output = word;
@@ -69,6 +71,7 @@ namespace Exercise2
 
         public static void Lookup1Visitor()
         {
+            //TODO unit test
             int age = Util.AskForInt(Language.EnterAgeEnglish, Language.AgeEnglish, ui);
             Visitor v = new Visitor(age);
 
@@ -79,6 +82,7 @@ namespace Exercise2
 
         public static void LookupLots()
         {
+            //TODO unit test
             int iAmountVisitors = Util.AskForInt(Language.EnterAmountVisitorsEnglish, Language.AmountVisitorsEnglish, ui);
 
             //Calculate total price for selected amount of visitors

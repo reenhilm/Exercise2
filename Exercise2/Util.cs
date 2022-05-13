@@ -9,7 +9,7 @@ namespace Exercise2
 {
     internal static class Util
     {
-        public static string AskFor3Words(string question, string questionName, ConsoleUI ui)
+        public static string AskFor3Words(string question, string questionName, IUI ui)
         {
             bool success = false;
             string line;
@@ -29,7 +29,7 @@ namespace Exercise2
             while (!success);
             return line;
         }
-        public static string AskForString(string question, string questionName, ConsoleUI ui)
+        public static string AskForString(string question, string questionName, IUI ui)
         {
             bool success = false;
             string line;
@@ -47,7 +47,7 @@ namespace Exercise2
             return line;
         }
 
-        public static int AskForInt(string question, string questionName, ConsoleUI ui)
+        public static int AskForInt(string question, string questionName, IUI ui)
         {
             bool success = false;
             int iNumber = -1;

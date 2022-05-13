@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Exercise2
 {
-    internal class Visitor
+    public class Visitor
     {
         public int Age { get; private set; }
 
@@ -17,6 +17,7 @@ namespace Exercise2
             this.Age = age;
 
             //Create Price According to Age of visitor
+            //TODO unit tests with different ages
             if (age < Pricing.exceptionPriceBelow || age >= Pricing.exceptionPriceMin)
                 this.Price = new ExceptionPrice();
             else if (age < Pricing.youthPriceBelow)
