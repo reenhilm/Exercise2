@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
+[assembly:InternalsVisibleTo("MainMethods.Tests")]
 namespace Exercise2
 {
+
     internal static class Util
     {
         public static string AskFor3Words(string question, string questionName, IUI ui)
@@ -21,13 +24,18 @@ namespace Exercise2
                 //Regex replaces multiple white-spaces with a single one
                 if (string.IsNullOrWhiteSpace(line))
                     ui.Print(string.Concat(Language.MustEnterValidEnglish + questionName));
-                else if(Regex.Replace(line, @"\s+", " ").Trim().Split(" ").Length < 3)
+                else if(DuplicateSpacesIntoSingleSpaces(line).Split(" ").Length < 3)
                     ui.Print(string.Concat(Language.MustEnterValidEnglish + questionName));
                 else
                     success = true;
             }
             while (!success);
             return line;
+        }
+
+        public static string DuplicateSpacesIntoSingleSpaces(string line)
+        {
+            return Regex.Replace(line, @"\s+", " ").Trim();
         }
         public static string AskForString(string question, string questionName, IUI ui)
         {

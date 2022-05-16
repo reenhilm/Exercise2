@@ -51,7 +51,7 @@ namespace Exercise2
 
         public override string? ToString()
         {
-            return string.Concat(Name, " ", Value, "kr");
+            return string.Concat(Name, " ", Value, Pricing.currency);
         }
     }
 
