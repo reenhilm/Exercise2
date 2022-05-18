@@ -21,25 +21,15 @@ namespace Exercise2
     public class MockUI : IUI
     {
         public static string SetInput { get; set; } = "1";
-        public static string lastOutput { get; set; } = "1";
+        public static string LastOutput { get; set; } = "1";
         public string GetInput()
         {
             return SetInput;
         }
 
-        public string GetLastOutput()
-        {
-            return lastOutput;
-        }
-
-        public void SetNextInput(string line)
-        {
-            SetInput = line;
-        }
-
         public void Print(string? message)
         {
-            lastOutput = message;
+            LastOutput = message ?? string.Empty;
         }
     }
 }

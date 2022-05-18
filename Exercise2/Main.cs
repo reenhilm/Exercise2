@@ -12,8 +12,9 @@ namespace Exercise2
 {
     public class Main
     {
+        //Visible due to testing posibilities
         public static IUI ui = new ConsoleUI();
-        public void Start()
+        public static void Start()
         {
             Menu();
             Exit();
@@ -89,7 +90,7 @@ namespace Exercise2
         {
             //TODO unit test
             int age = Util.AskForInt(Language.EnterAgeEnglish, Language.AgeEnglish, ui);
-            Visitor v = new Visitor(age);
+            Visitor v = new (age);
 
             //The ExceptionalPrice should not be printed and does not have a Name property
             if (v.Price.GetType() != typeof(ExceptionPrice))
@@ -105,17 +106,17 @@ namespace Exercise2
             double dTotal = 0;
             for (int i = 0; i < iAmountVisitors; i++)
             {
-                dTotal = addNewVisitorToTotal(dTotal);
+                dTotal = AddNewVisitorToTotal(dTotal);
             }
 
             ui.Print(string.Concat(Language.PrintAmountVisitorsEnglish, iAmountVisitors));
             ui.Print(string.Concat(Language.PrintTotalPriceLotsEnglish, dTotal, Pricing.currency));
         }
 
-        private static double addNewVisitorToTotal(double dTotal)
+        private static double AddNewVisitorToTotal(double dTotal)
         {
             int age = Util.AskForInt(Language.EnterAgeEnglish, Language.AgeEnglish, ui);
-            Visitor v = new Visitor(age);
+            Visitor v = new (age);
             dTotal += v.Price.Value;
             return dTotal;
         }

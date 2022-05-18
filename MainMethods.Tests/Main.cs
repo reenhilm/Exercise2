@@ -7,13 +7,10 @@ namespace Main.Tests
     [TestClass]
     public class MainTest
     {
-        Exercise2.MockUI mockUI = null!;
-
         [TestInitialize]
         public void Init()
         {
             Exercise2.Main.ui = new Exercise2.MockUI();
-            mockUI = (Exercise2.MockUI)Exercise2.Main.ui;
         }
 
         [TestMethod]
@@ -21,11 +18,11 @@ namespace Main.Tests
         public void Multiply10(string strUserInput, string shouldReturn)
         {
             //Arrange
-            mockUI.SetNextInput(strUserInput);
+            Exercise2.MockUI.SetInput = strUserInput;
 
             //Act
             Exercise2.Main.Multiply10();
-            string doesReturn = mockUI.GetLastOutput();
+            string doesReturn = Exercise2.MockUI.LastOutput;
 
             //Assert
             Assert.AreEqual(doesReturn, shouldReturn);
@@ -36,11 +33,11 @@ namespace Main.Tests
         public void GetThird(string strUserInput, string shouldReturn)
         {
             //Arrange
-            mockUI.SetNextInput(strUserInput);
+            Exercise2.MockUI.SetInput = strUserInput;
 
             //Act
             Exercise2.Main.GetThird();
-            string doesReturn = mockUI.GetLastOutput();
+            string doesReturn = Exercise2.MockUI.LastOutput;
 
             //Assert
             Assert.AreEqual(doesReturn, shouldReturn);
@@ -52,11 +49,11 @@ namespace Main.Tests
         public void Lookup1Visitor(string strUserInput, string shouldReturn)
         {
             //Arrange
-            mockUI.SetNextInput(strUserInput);
+            Exercise2.MockUI.SetInput = strUserInput;
 
             //Act
             Exercise2.Main.Lookup1Visitor();
-            string doesReturn = mockUI.GetLastOutput();
+            string doesReturn = Exercise2.MockUI.LastOutput;
 
             //Assert
             Assert.AreEqual(doesReturn, shouldReturn);
@@ -74,13 +71,17 @@ namespace Main.Tests
         public void TestAddNewVisitorToTotal(double dStartValue, string strUserInput, double shouldReturn)
         {
             //Arrange
-            mockUI.SetNextInput(strUserInput);
-            Exercise2.Main objUnderTest = new Exercise2.Main();
-            MethodInfo methodInfo = typeof(Exercise2.Main).GetMethod("addNewVisitorToTotal", BindingFlags.NonPublic | BindingFlags.Static);
+            Exercise2.MockUI.SetInput = strUserInput;
+            Exercise2.Main objUnderTest = new ();
+            MethodInfo? methodInfo = typeof(Exercise2.Main).GetMethod("AddNewVisitorToTotal", BindingFlags.NonPublic | BindingFlags.Static);
             object[] parameters = { dStartValue };
 
             //Act
-            double doesReturn = (double)(methodInfo.Invoke(objUnderTest, parameters));
+#pragma warning disable CS8605 // Unboxing a possibly null value.
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
+            double doesReturn = (double)methodInfo.Invoke(objUnderTest, parameters);
+#pragma warning restore CS8602 // Dereference of a possibly null reference.
+#pragma warning restore CS8605 // Unboxing a possibly null value.
 
             //Assert
             Assert.AreEqual(doesReturn, shouldReturn);
@@ -95,10 +96,10 @@ namespace Main.Tests
         public void VisitorPrice_ToString(int iUserInput, string shouldReturn)
         {
             //Arrange
-            Visitor v = new Visitor(iUserInput);
+            Visitor v = new (iUserInput);
 
             //Act
-            string doesReturn = v.Price.ToString();
+            string? doesReturn = v.Price.ToString();
 
             //Note: ExceptionPrice is not meant to be printed
             //Assert

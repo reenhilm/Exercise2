@@ -35,7 +35,7 @@ namespace Exercise2
             Name = Language.defaultPriceDescription;
         }
     }
-    internal class PrintablePrice : AllPrices, IPrice
+    internal class PrintablePrice : AllPrices
     {
         private string name = null!;
         public string Name {
@@ -57,7 +57,7 @@ namespace Exercise2
 
 
 
-    internal class ExceptionPrice : AllPrices, IPrice
+    internal class ExceptionPrice : AllPrices
     {
         public ExceptionPrice()
         {
@@ -65,20 +65,9 @@ namespace Exercise2
         }
     }
 
-    internal class AllPrices
+    abstract class AllPrices : IPrice
     {
-        private double dValue;
-        public double Value
-        {
-            get
-            {
-                return dValue;
-            }
-            set
-            {
-                dValue = value;
-            }
-        }
+        public double Value { get; set; }
     }
 
     public interface IPrice

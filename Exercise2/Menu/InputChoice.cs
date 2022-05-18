@@ -12,7 +12,7 @@ namespace Exercise2.Menu
         {
             if (int.TryParse(selectedinput, out int iSelectedInput))
             {
-                List<int> validSelections = new List<int>();
+                List<int> validSelections = new ();
                 foreach (int i in Enum.GetValues(typeof(InputEnum)))
                     validSelections.Add(i);
 
@@ -37,31 +37,23 @@ namespace Exercise2.Menu
         public static string GetDescriptionForInput(InputEnum input)
         {
             //TODO unit test input enum as description?
-            switch (input)
+            return input switch
             {
-                case InputEnum.Lookup1:
-                    return Lookup1Description;
-                case InputEnum.Multiply10:
-                    return Multiply10Description;
-                case InputEnum.GetThird:
-                    return GetThirdDescription;
-                case InputEnum.LookupLots:
-                    return LookupLotsDescription;
-                case InputEnum.Exit:
-                    return ExitDescription;
-                case InputEnum.Invalid:
-                    return InvalidDescription;
-
-                default:
-                    return InvalidDescription;
-            }
+                InputEnum.Lookup1 => Lookup1Description,
+                InputEnum.Multiply10 => Multiply10Description,
+                InputEnum.GetThird => GetThirdDescription,
+                InputEnum.LookupLots => LookupLotsDescription,
+                InputEnum.Exit => ExitDescription,
+                InputEnum.Invalid => InvalidDescription,
+                _ => InvalidDescription,
+            };
         }
 
-        private static string Lookup1Description = string.Concat((int)InputEnum.Lookup1, Language.Lookup1English);
-        private static string LookupLotsDescription = string.Concat((int)InputEnum.LookupLots, Language.LookupLotsEnglish);
-        private static string ExitDescription = string.Concat((int)InputEnum.Exit, Language.ExitEnglish);
-        private static string InvalidDescription = Language.InvalidEnglish;
-        private static string Multiply10Description = string.Concat((int)InputEnum.Multiply10, Language.Multiply10English);
-        private static string GetThirdDescription = string.Concat((int)InputEnum.GetThird, Language.GetThirdEnglish);
+        private readonly static string Lookup1Description = string.Concat((int)InputEnum.Lookup1, Language.Lookup1English);
+        private readonly static string LookupLotsDescription = string.Concat((int)InputEnum.LookupLots, Language.LookupLotsEnglish);
+        private readonly static string ExitDescription = string.Concat((int)InputEnum.Exit, Language.ExitEnglish);
+        private readonly static string InvalidDescription = Language.InvalidEnglish;
+        private readonly static string Multiply10Description = string.Concat((int)InputEnum.Multiply10, Language.Multiply10English);
+        private readonly static string GetThirdDescription = string.Concat((int)InputEnum.GetThird, Language.GetThirdEnglish);
     }
 }
